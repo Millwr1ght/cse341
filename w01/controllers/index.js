@@ -7,6 +7,6 @@ export const status = (req, res) => {
 };
 
 export const getName = (req, res) => {
-    res.send('I knew a guy named: Daniel Owen Robinson.');
+    res.send('Daniel Owen Robinson.');
 };
 
