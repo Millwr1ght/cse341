@@ -1,9 +1,11 @@
-const express = require('express');
-const router = express.Router;
+import { Router } from 'express';
+import { getName, status } from '../controllers/index.js';
+const router = Router();
 
 // home page
-router.get('/', (req, res) => {
-    res.send('Hello World');
-});
+router.get('/', getName);
 
-module.exports = router;
+// status
+router.get('/status', status);
+
+export { router };
