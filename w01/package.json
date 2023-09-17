@@ -1,0 +1,15 @@
+{
+  "name": "cse341_w01",
+  "version": "1.0.0",
+  "description": "i hope i can change this later",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Nathan \\ <joh20160@byui.edu\\>",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
