@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
+import 'dotenv/config'
 
-const URI = "mongodb+srv://dbUser:jApF6iQfpcVfhyrT@cluster0.rmaxfnt.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp";
+const URI = process.env.DBconnection;
 
 
 async function listDatabases(client){
