@@ -1,11 +1,14 @@
 import { Router } from 'express';
-import { getName, status } from '../controllers/index.js';
+import { status } from '../controllers/index.js';
+import { r_contacts } from "./contacts.js";
 const router = Router();
 
 // home page
-router.get('/', getName);
+//router.get('/', getName);
 
 // status
-router.get('/status', status);
+router.get('/', status);
+
+router.use("/contacts", r_contacts);
 
 export { router };

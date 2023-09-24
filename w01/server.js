@@ -1,11 +1,24 @@
 import express from "express";
+import { connectDB } from "./db/connection.js";
 import { router } from "./routes/index.js";
-const app = express();
+import { contacts } from "./controllers/index.js";
+const app = express(); //this is the server!
 const port = 3000;
 
 
-app.use("/", router);
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+}).use("/", router);
 
-app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+connectDB((error, connection) => {
+    if (error) {
+        console.error(error);
+    } else {
+        app.listen(port, () => {
+            console.log(`App listening on port ${port}`);
+        });
+
+        connection.db("test").collection("contacts").find().toArray().then((data)=> {console.log(data)});
+    }
 });
