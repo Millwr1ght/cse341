@@ -1,15 +1,15 @@
-import { getDB } from "../db/connection.js";
+import dbclient from "../db/dbclient.js";
 
 export const contacts = {
     create: (req, res) => {
         res.json(req.body);
     },
     getAll: async (req, res, next) => {
-        console.log("getting all contacts: ")
-        const result = await getDB().db("test").collection("contacts").find();
-        result.toArray().then((lists)=>{
+        console.log("getting all contacts: ");
+        const result = await dbclient.getDB().collection("contacts").find();
+        result.toArray().then((contacts)=>{
             res.setHeader('Content-Type', 'application/json');
-            res.status(200).json(lists);
+            res.status(200).json(contacts);
         })
         
     },

@@ -1,6 +1,8 @@
 import express from "express";
-import { connectDB } from "./db/connection.js";
+
+import dbclient from "./db/dbclient.js";
 import { router } from "./routes/index.js";
+
 const app = express(); //this is the server!
 const port = 3000;
 
@@ -10,14 +12,16 @@ app.use((req, res, next) => {
     next();
 }).use("/", router);
 
-connectDB((error, connection) => {
-    if (error) {
-        console.error(error);
-    } else {
+
+dbclient.connect(
+    () => {
         app.listen(port, () => {
             console.log(`App listening on port ${port}`);
         });
 
-        connection.db("test").collection("contacts").find().toArray().then((data)=> {console.log(data)});
+        dbclient.getDB().collection("contacts").find().toArray().then((data)=> {console.log(data)});
+    },
+    (error)=> {
+        console.error(error);
     }
-});
+);
