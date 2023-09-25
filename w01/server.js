@@ -1,7 +1,6 @@
 import express from "express";
 import { connectDB } from "./db/connection.js";
 import { router } from "./routes/index.js";
-import { contacts } from "./controllers/index.js";
 const app = express(); //this is the server!
 const port = 3000;
 
