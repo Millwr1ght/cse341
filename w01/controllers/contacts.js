@@ -1,4 +1,5 @@
 import { query } from "express";
+import { ObjectId } from "mongodb";
 import dbclient from "../db/dbclient.js";
 
 const collection = "contacts";
@@ -20,7 +21,8 @@ export const contacts = {
         const { id } = req.params;
         console.log(id);
         console.log(`getting contact id: ${id}`);
-        const result = await dbclient.findDocumentById(collection, id)
+        let query = {"_id": new ObjectId(id)}
+        const result = await dbclient.findDocumentsByQuery(collection, query)
         .then((data) => {
             res.setHeader('Content-Type', 'application/json');
             res.status(200).json(data);

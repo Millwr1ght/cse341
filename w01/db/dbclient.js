@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 import 'dotenv/config'
 
 let _DB;
@@ -27,7 +27,6 @@ export default {
 
     //connection
     connect,
-
     getDB,
 
     //create
@@ -42,22 +41,6 @@ export default {
     },
 
     //read
-    async findDocumentById(collection, idstr) {
-        let idx = new ObjectId(idstr);
-        console.log(idx);
-        try {
-            let result = await getDB().collection(collection).findOne({ id: idx });
-            if (!result) {
-                console.log(`no document at id: '${idx}'`);
-            } else {
-                console.log(`document found with id: ${idx}`, result);
-                return result
-            }
-        } catch (error) {
-            console.error("db.findDocumentById error: ", error);
-        }
-    },
-
     async findDocumentsByQuery(collection, query = {}, limit = 10) {
         try {
             let result = await getDB().collection(collection).find(query).limit(limit);
