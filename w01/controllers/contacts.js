@@ -5,8 +5,19 @@ import dbclient from "../db/dbclient.js";
 const collection = "contacts";
 
 export const contacts = {
-    create: (req, res) => {
-        res.json(req.body);
+    create: async (req, res) => {
+        console.log("creating contact");
+
+        //build document
+        let document = req.body;
+
+        //insert document
+        const result = await dbclient.insertDocument(collection, document)
+        .then((data)=>{
+            res.setHeader('Content-Type', 'application/json');
+            res.status(200).json(data);
+        })
+        
     },
     getAll: async (req, res, next) => {
         console.log("getting all contacts: ");
