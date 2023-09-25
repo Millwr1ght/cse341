@@ -12,14 +12,13 @@ app.use((req, res, next) => {
     next();
 }).use("/", router);
 
-
 dbclient.connect(
-    () => {
+    async () => {
         app.listen(port, () => {
             console.log(`App listening on port ${port}`);
         });
 
-        dbclient.getDB().collection("contacts").find().toArray().then((data)=> {console.log(data)});
+        await dbclient.findDocumentsByQuery("contacts", {"firstName":"Elle"}).then((data)=> {console.log(data)});
     },
     (error)=> {
         console.error(error);

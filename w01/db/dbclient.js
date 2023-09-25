@@ -1,34 +1,39 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import 'dotenv/config'
 
 let _DB;
 
+//connection
+async function connect(succeeded, failed) {
+    try {
+        let connection = await MongoClient.connect(process.env.DBconnection);
+        _DB = connection.db(process.env.DBname);
+        console.log("connected to DB");
+        succeeded();
+    } catch (error) {
+        console.error("db.connect error: ", error);
+        failed(error);
+    }
+}
+
+function getDB() {
+    if (!_DB) {
+        throw Error('DB not set up yet.');
+    } 
+    return _DB;
+}
+
 export default {
 
     //connection
-    async connect(succeeded, failed) {
-        try {
-            let connection = await MongoClient.connect(process.env.DBconnection);
-            _DB = connection.db(process.env.DBname);
-            console.log("connected to DB");
-            succeeded();
-        } catch (error) {
-            console.error("db.connect error: ", error);
-            failed(error);
-        }
-    },
+    connect,
 
-    getDB() {
-        if (!_DB) {
-            throw Error('DB not set up yet.')
-        } 
-        return _DB;
-    },
+    getDB,
 
     //create
     async insertDocument(collection, document) {
         try {
-            const result = await this.db.collection(collection).insertOne(document);
+            let result = await getDB().collection(collection).insertOne(document);
             console.log("document inserted with id: ", result);
             return result;
         } catch (error) {
@@ -37,11 +42,13 @@ export default {
     },
 
     //read
-    async findDocumentById(collection, idx) {
+    async findDocumentById(collection, idstr) {
+        let idx = new ObjectId(idstr);
+        console.log(idx);
         try {
-            const result = await this.db.collection(collection).findOne({ id: idx });
+            let result = await getDB().collection(collection).findOne({ id: idx });
             if (!result) {
-                console.log(`no listing at id: '${idx}'`);
+                console.log(`no document at id: '${idx}'`);
             } else {
                 console.log(`document found with id: ${idx}`, result);
                 return result
@@ -51,9 +58,9 @@ export default {
         }
     },
 
-    async findDocumentsByQuery(collection, query, limit = 10) {
+    async findDocumentsByQuery(collection, query = {}, limit = 10) {
         try {
-            const result = await this.db.collection(collection).find(query).limit(limit);
+            let result = await getDB().collection(collection).find(query).limit(limit);
             if (!result) {
                 console.log(`no documents found that match query ${query}`);
             } else {
@@ -66,10 +73,25 @@ export default {
         }
     },
 
+    async findAllDocuments(collection) {
+        try {
+            let result = await getDB().collection(collection).find();
+            if (!result) {
+                console.log("no documents...? huh.");
+            } else {
+                result = result.toArray();
+                console.log("document(s) found: ", result);
+                return result;
+            }
+        } catch (error) {
+            console.error("db.findAllDocuments error: ", error);
+        }
+    },
+
     //update
     //delete
     //close
     async close() {
-        return await _DB.close()
+        return await getDB().close()
     }
 }
