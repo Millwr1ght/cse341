@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "server start": "nodemon server.js"
+    "server start": "nodemon server.js",
+    "build": "npm install nodemon mongodb dotenv express"
   },
   "author": "Nathan \\ <joh20160@byui.edu\\>",
   "license": "ISC",

@@ -6,8 +6,8 @@ let _DB;
 //connection
 async function connect(succeeded, failed) {
     try {
-        let connection = await MongoClient.connect(process.env.DBconnection);
-        _DB = connection.db(process.env.DBname);
+        let connection = await MongoClient.connect(process.env.MONGODB_URI);
+        _DB = connection.db(process.env.MONGODB_DB);
         console.log("connected to DB");
         succeeded();
     } catch (error) {
