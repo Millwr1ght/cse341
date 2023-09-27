@@ -22,5 +22,6 @@ dbclient.connect(
     },
     (error)=> {
         console.error(error);
+        dbclient.close();
     }
 );
