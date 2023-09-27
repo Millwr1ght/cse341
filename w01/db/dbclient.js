@@ -6,9 +6,12 @@ let _DB;
 //connection
 async function connect(succeeded, failed) {
     try {
-        let connection = await MongoClient.connect(process.env.MONGODB_URI);
-        _DB = connection.db(process.env.MONGODB_DB);
-        console.log("connected to DB");
+        let connection = await MongoClient.connect(process.env.MONGODB_URI, (err, database) => {
+            if(err){ throw err }
+            _DB = database;
+            console.log("connected to DB");
+        });
+        //_DB = connection.db(process.env.MONGODB_DB);
         succeeded();
     } catch (error) {
         console.error("db.connect error: ", error);
@@ -23,11 +26,16 @@ function getDB() {
     return _DB;
 }
 
+async function close() {
+    return await getDB().close()
+}
+
 export default {
 
     //connection
     connect,
     getDB,
+    close,
 
     //create
     async insertDocument(collection, document) {
@@ -73,8 +81,4 @@ export default {
 
     //update
     //delete
-    //close
-    async close() {
-        return await getDB().close()
-    }
 }
