@@ -1,17 +1,11 @@
 import express from "express";
+import { routes } from "./routes/index.js";
 
 const app = express();
 const port = 3000;
 
 // on the home page, show the name of someone you know
-app.get('/', (req, res) => {
-    res.send('Emily!')
-});
-
-// learning params
-app.get('/users/:name', (req, res) => {
-    res.send(req.params.name)
-})
+app.use('/', routes);
 
 // log if working
 app.listen(port, () => {
