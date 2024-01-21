@@ -1,5 +1,5 @@
 /* base controller */
-import { dbConnect } from "../db/connection.js";
+import { dbConnect, getAllContacts } from "../db/connection.js";
 
 // return a name of someone I know
 export const getName = (req, res) => {
@@ -25,15 +25,31 @@ export const getUser = (req,res) => {
 export const getAllContacts = (req, res) => {
     //connect to database
     dbConnect(async (client) => {
-        //query
+        //query db
         const result = await client.db(process.env.DB_NAME).collection("contacts").find({});
 
-        //output
+        //output result
         if (result) {
-            console.log(result);
-            res.send(result);
+            console.log(`Found the following contact(s): `);
+            const results = await result.toArray();
+            // results.forEach((result, i) => {
+            //     console.log(`${i + 1}. name: ${result.firstName} ${result.lastName}`);
+            //     console.log(`   email: ${result.email}`);
+            //     console.log(`   favorite colour: ${result.favoriteColor}`);
+            //     console.log();
+            // })
+            res.send(results);
         } else {
-            console.log(`No contacts in your contacts, or something went wrong.`);
+            console.log(`No one found.`);
         }
     }).catch(console.dir);
+}
+
+export const getContact = (req, res) => {
+    const userToGet = { _id: req.params.user_id }
+
+    dbConnect(async (client, userToGet) => {
+        //query
+        const result = await client.db(process.env.DB_NAME).collection("contacts").find(userToGet);
+    });
 }

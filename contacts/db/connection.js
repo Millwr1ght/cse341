@@ -1,4 +1,4 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
 import 'dotenv/config';
 
 const uri = process.env.DB_URI;
@@ -54,7 +54,7 @@ export const dbConnect = async (callback, data) => {
     await client.close();
   }
 }
-dbConnect(getAllUsers).catch(console.dir);
+dbConnect(getContactByName, "Kit").catch(console.dir);
 
 async function listDatabases(client) {
     let databasesList = await client.db().admin().listDatabases();
@@ -63,8 +63,9 @@ async function listDatabases(client) {
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
 
+/* Contacts table crud */
 //read
-async function getContact(client, fName) {
+async function getContactByName(client, fName) {
     //query db
     const result = await client.db(process.env.DB_NAME).collection("contacts").findOne({firstName: fName});
 
@@ -80,6 +81,40 @@ async function getContact(client, fName) {
     }
 };
 
+async function getContactById(client) {
+    //query db
+    const result = await client.db(process.env.DB_NAME).collection("contacts").find({_id: new ObjectId('650f9d8d75e5bba9d0c9a598')});
+
+    //output result
+    if (result) {
+        console.log(`Found someone with ID of.`);
+        const results = result.toArray()
+        console.log(results);
+    } else {
+        console.log(`No one with ID of found.`);
+    }
+}
+
+async function getAllContacts(client) {
+    //query db
+    const result = await client.db(process.env.DB_NAME).collection("contacts").find({});
+
+    //output result
+    if (result) {
+        console.log(`Found the following contact(s): `);
+        const results = await result.toArray();
+        results.forEach((result, i) => {
+            console.log(`${i + 1}. name: ${result.firstName} ${result.lastName}`);
+            console.log(`   email: ${result.email}`);
+            console.log(`   favorite colour: ${result.favoriteColor}`);
+            console.log();
+        })
+    } else {
+        console.log(`No one found.`);
+    }
+}
+
+/* users table crud */
 //create
 async function addUser(client, userData) {
     //query

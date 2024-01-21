@@ -13,7 +13,9 @@ routes.get('/users/:name', (req, res) => {
 });
 
 // the linktree assignment route
-routes.get('/professional', baseController.getUser)
+routes.get('/professional', baseController.getUser);
 
 //get all contacts
-routes.get('/contacts', baseController.getAllContacts)
+routes.get('/contacts', baseController.getAllContacts);
+
+routes.get('/users/:user_id', baseController.getContactById);
