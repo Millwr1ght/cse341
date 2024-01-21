@@ -47,7 +47,7 @@ export const dbConnect = async (callback, data) => {
     //try the callback, if any
     callback 
       ? await callback(client, data)
-      : console.log('nevermind');
+      : 'nevermind';
 
   } finally {
     // Ensures that the client will close when you finish/error
