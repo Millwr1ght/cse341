@@ -42,7 +42,7 @@ export const dbConnect = async (callback, data) => {
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
     // make some calls
-    await listDatabases(client);
+    //await listDatabases(client);
 
     //try the callback, if any
     callback 
@@ -54,7 +54,7 @@ export const dbConnect = async (callback, data) => {
     await client.close();
   }
 }
-dbConnect().catch(console.dir);
+dbConnect(getAllUsers).catch(console.dir);
 
 async function listDatabases(client) {
     let databasesList = await client.db().admin().listDatabases();
@@ -103,6 +103,17 @@ async function getUser(client, userId) {
     }
 };
 
+async function getAllUsers(client) {
+    const result = await client.db(process.env.DB_NAME).collection("users").findOne({_id: 1});
+
+    if (result) {
+        console.log(result);
+        //res.send(result);
+    } else {
+        console.log(`No users returned.`);
+    }
+}
+
 //update
 async function updateUser(client, userId) {
     //query
@@ -113,7 +124,6 @@ async function updateUser(client, userId) {
     console.log(`User(s) updated: ${result.modifiedCount}`);
 }
 
-
 //delete
 async function deleteUser(client, userId) {
     //query
@@ -122,3 +132,4 @@ async function deleteUser(client, userId) {
     //output
     console.log(`Number of users deleted: ${result.deletedCount}`);
 }
+

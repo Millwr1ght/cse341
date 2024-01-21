@@ -9,16 +9,16 @@ export const getName = (req, res) => {
 //get a document from the users table
 export const getUser = (req,res) => {
     //connect to database
-    dbConnect(async (client, filter) => {
-        const result = await client.db(process.env.DB_NAME).collection("users").find({});
+    dbConnect(async (client) => {
+        const result = await client.db(process.env.DB_NAME).collection("users").findOne({_id: 1});
 
         if (result) {
             console.log(result);
             res.send(result);
         } else {
-            console.log(`Query ${fName} returned nothing.`);
+            console.log(`Query returned nothing.`);
         }
-    }, filter).catch(console.dir);
+    }).catch(console.dir);
 }
 
 // get all documents form the contacts table
