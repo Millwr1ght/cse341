@@ -54,7 +54,7 @@ export const dbConnect = async (callback, data) => {
     await client.close();
   }
 }
-dbConnect(addUser, newUser).catch(console.dir);
+dbConnect().catch(console.dir);
 
 async function listDatabases(client) {
     let databasesList = await client.db().admin().listDatabases();
