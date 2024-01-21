@@ -1,8 +1,9 @@
 import express from "express";
 import { routes } from "./routes/index.js";
 
+
 const app = express();
-const port = 3000;
+const port = 8080;
 
 // on the home page, show the name of someone you know
 app.use('/', routes);

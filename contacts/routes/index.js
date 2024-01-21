@@ -11,3 +11,9 @@ routes.get('/', baseController.getName);
 routes.get('/users/:name', (req, res) => {
     res.send(req.params.name)
 });
+
+// the linktree assignment route
+routes.get('/professional', baseController.getUser)
+
+//get all contacts
+routes.get('/contacts', baseController.getAllContacts)
