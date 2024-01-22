@@ -1,10 +1,11 @@
 import Router from 'express';
 import * as baseController from '../controllers/index.js';
+import { contacts_routes } from '../routes/contacts.js';
 
 //main router + routes
 export const routes = Router();
 
-// home
+// on the home page, show the name of someone I know
 routes.get('/', baseController.getName);
 
 // params practice
@@ -16,6 +17,4 @@ routes.get('/users/:name', (req, res) => {
 routes.get('/professional', baseController.getUser);
 
 //get all contacts
-routes.get('/contacts', baseController.getAllContacts);
-
-routes.get('/users/:user_id', baseController.getContactById);
+routes.use('/contacts', contacts_routes);
