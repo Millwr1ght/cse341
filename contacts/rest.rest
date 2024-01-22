@@ -1,0 +1,8 @@
+GET https://mwrenderintro.onrender.com/
+
+GET https://mwrenderintro.onrender.com/contacts/
+
+GET https://mwrenderintro.onrender.com/contacts/:contact_id
+
+//for example,
+GET https://mwrenderintro.onrender.com/contacts/650f9d8d75e5bba9d0c9a598
