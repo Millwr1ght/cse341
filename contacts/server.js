@@ -1,14 +1,27 @@
 import express from "express";
 import { routes } from "./routes/index.js";
+import { dbConnect } from "./db/connection.js";
+import bodyParser from "body-parser";
 
 
 const app = express();
 const port = 8080;
 
-// on the home page, show the name of someone you know
-app.use('/', routes);
+app.use(bodyParser.json())
+.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  })
+.use('/', routes);
 
 // log if working
-app.listen(port, () => {
-    console.log(`App listening on port ${port}`);
+
+dbConnect((err, mongodb) => {
+    if (err) {
+        console.log(err)
+    } else {
+        app.listen(port, () => {
+            console.log(`App listening on port ${port}`);
+        })
+    }
 })

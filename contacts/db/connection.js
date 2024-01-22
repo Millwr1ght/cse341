@@ -1,4 +1,4 @@
-import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
+import { MongoClient, ServerApiVersion, ObjectId, BSON } from "mongodb";
 import 'dotenv/config';
 
 const uri = process.env.DB_URI;
@@ -33,28 +33,47 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   }
 });
-export const dbConnect = async (callback, data) => {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
-    // make some calls
-    //await listDatabases(client);
+//setup db object
+let _db;
 
-    //try the callback, if any
-    callback 
-      ? await callback(client, data)
-      : 'nevermind';
+export const dbConnect = async (callback) => {
+    //connect to mongodb
+    //callback should take params (err, db_crawler)
 
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
+    if (_db) {
+        console.log('Already connected!');
+        callback(null, _db);
+    }
+
+    try {
+        // Connect the client to the server
+        await client.connect();
+        // Send a ping to confirm a successful connection
+        await client.db("admin").command({ ping: 1 });
+        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+
+        //set up db crawler
+        _db = client;
+        callback ? callback(null, _db) : console.log('null');;
+
+        // make some calls, such as
+        //await listDatabases(_db);
+        //await getContactById(_db, '650f9e2b75e5bba9d0c9a599');
+
+    } catch (err) {
+        callback(err);
+    }
 }
-dbConnect(getContactByName, "Kit").catch(console.dir);
+
+export const getDb = () => {
+    if (!_db) {
+        throw Error('DB not connected.')
+    }
+    return _db;
+};
+
+//dbConnect().catch(console.dir);
 
 async function listDatabases(client) {
     let databasesList = await client.db().admin().listDatabases();
@@ -81,21 +100,22 @@ async function getContactByName(client, fName) {
     }
 };
 
-async function getContactById(client) {
+async function getContactById(client, id) {
     //query db
-    const result = await client.db(process.env.DB_NAME).collection("contacts").find({_id: new ObjectId('650f9d8d75e5bba9d0c9a598')});
+
+    const bId = new BSON.ObjectId(id)
+    const result = await client.db(process.env.DB_NAME).collection("contacts").findOne({_id: bId});
 
     //output result
     if (result) {
-        console.log(`Found someone with ID of.`);
-        const results = result.toArray()
-        console.log(results);
+        console.log(`Found someone:`);
+        console.log(result);
     } else {
-        console.log(`No one with ID of found.`);
+        console.log(`No one found.`);
     }
 }
 
-async function getAllContacts(client) {
+async function getContacts(client) {
     //query db
     const result = await client.db(process.env.DB_NAME).collection("contacts").find({});
 
@@ -138,7 +158,7 @@ async function getUser(client, userId) {
     }
 };
 
-async function getAllUsers(client) {
+async function getAllUsers(err, client) {
     const result = await client.db(process.env.DB_NAME).collection("users").findOne({_id: 1});
 
     if (result) {
