@@ -35,7 +35,7 @@ const client = new MongoClient(uri, {
 });
 
 //setup db object
-let _db;
+let _db, _contactsCollection;
 
 export const dbConnect = async (callback) => {
     //connect to mongodb
@@ -57,6 +57,8 @@ export const dbConnect = async (callback) => {
         _db = client;
         callback ? callback(null, _db) : console.log('null');;
 
+        _contactsCollection = client.db(process.env.DB_NAME).collection("contacts")
+
         // make some calls, such as
         //await listDatabases(_db);
         //await getContactById(_db, '650f9e2b75e5bba9d0c9a599');
@@ -73,6 +75,13 @@ export const getDb = () => {
     return _db;
 };
 
+export const contactsCollection = () => {
+    if (!_contactsCollection) {
+        throw Error('Collection not found.')
+    }
+    return _contactsCollection;
+}
+
 //dbConnect().catch(console.dir);
 
 async function listDatabases(client) {
@@ -81,6 +90,9 @@ async function listDatabases(client) {
     console.log("Databases: ");
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
+
+
+
 
 /* Contacts table crud */
 //read
