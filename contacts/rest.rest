@@ -1,8 +1,44 @@
 GET https://mwrenderintro.onrender.com/
 
+//create
+POST https://mwrenderintro.onrender.com/contacts/add HTTP/1.1
+Content-Type: application/json
+  
+{
+    "firstName": string,
+    "lastName": string,
+    "email": string,
+    "favoriteColor": string,
+    "birthday": string
+}
+
+
+//read
 GET https://mwrenderintro.onrender.com/contacts/
 
 GET https://mwrenderintro.onrender.com/contacts/:contact_id
+// --for example,
+//GET https://mwrenderintro.onrender.com/contacts/650f9d8d75e5bba9d0c9a598
 
-//for example,
-GET https://mwrenderintro.onrender.com/contacts/650f9d8d75e5bba9d0c9a598
+
+//update
+PUT https://mwrenderintro.onrender.com/contacts/update
+Content-Type: application/json
+
+{
+    "contactId": string,
+    "firstName": string,
+    "lastName": string,
+    "email": string,
+    "favoriteColor": string,
+    "birthday": string
+}
+
+
+//delete
+DELETE https://mwrenderintro.onrender.com/contacts/delete
+Content-Type: application/json
+
+{
+    "contactId": string
+}

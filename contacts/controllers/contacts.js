@@ -6,7 +6,7 @@ import 'dotenv/config';
 
 //auxilliary
 function buildIdQuery(idNum) {
-    const bId = new BSON.ObjectId(req.params.contact_id)
+    const bId = new BSON.ObjectId(idNum)
     return { _id: bId }
 }
 
@@ -61,7 +61,7 @@ export const getContactById = async (req,res,next) => {
 export const updateContactbyId = async (req,res,next) => {
     try {
         //build query
-        const contactToFind = buildIdQuery(req.body.contact_id)
+        const contactToFind = buildIdQuery(req.body.contactId)
         //build update
         const update = {
             $set: {
