@@ -74,7 +74,7 @@ export const updateContactbyId = async (req,res,next) => {
         }
         const options = req.body.options;
         //send it
-        const result = await contactsCollection().findOneAndUpdate(contactToFind, update, options);
+        const result = await contactsCollection().updateOne(contactToFind, update, options);
         if (result) {
             //console.log(`Contact updated with _id: ${result.value._id}`);
             res.json('Success!');
