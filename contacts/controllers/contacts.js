@@ -91,7 +91,7 @@ export const updateContactbyId = async (req,res,next) => {
 /* --delete-- */
 export const deleteContactById = async (req,res,next) => {
     try { 
-        const contactToDelete = buildIdQuery(req.body.contact_id);
+        const contactToDelete = buildIdQuery(req.body.contactId);
 
         const result = await contactsCollection().deleteOne(contactToDelete)
         if (result.deletedCount === 0) {
