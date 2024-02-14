@@ -2,17 +2,20 @@ import express from "express";
 import { routes } from "./routes/index.js";
 import { dbConnect } from "./db/connection.js";
 import bodyParser from "body-parser";
+import middlewareWrapper from "cors";
 
 
 const app = express();
 const port = 8080;
 
-app.use(bodyParser.json())
-.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    next();
-  })
-.use('/', routes);
+app
+    .use(middlewareWrapper())
+    .use(bodyParser.json())
+    // .use((req, res, next) => {
+    //     res.setHeader('Access-Control-Allow-Origin', '*');
+    //     next();
+    // })
+    .use('/', routes);
 
 // log if working
 

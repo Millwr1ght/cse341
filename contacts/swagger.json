@@ -21,24 +21,6 @@
         }
       }
     },
-    "/users/{name}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/professional": {
       "get": {
         "description": "",

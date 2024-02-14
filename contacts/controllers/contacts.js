@@ -11,11 +11,16 @@ function buildIdQuery(idNum) {
 }
 
 /* --create-- */
-export const addContact = async (req,res,next) => {
+export const addContact = async (req, res, next) => {
+
+    if (!req.body) {
+        return res.status(400).send({
+            message: 'Data can not be empty!',
+        });
+    }
     try {
         const result = await contactsCollection().insertOne(req.body);
         console.log(`New contact added with _id: ${result.insertedId}`);
-        res.redirect('/contacts');
     } catch (error) {
         console.error(error);
     }
@@ -24,7 +29,7 @@ export const addContact = async (req,res,next) => {
 
 /* --read-- */
 // get all documents form the contacts table
-export const getAllContacts = async (req,res,next) => {
+export const getAllContacts = async (req, res, next) => {
     //connect &query database
     const result = await contactsCollection().find({});
 
@@ -38,7 +43,7 @@ export const getAllContacts = async (req,res,next) => {
     }
 }
 
-export const getContactById = async (req,res,next) => {
+export const getContactById = async (req, res, next) => {
     //build query args
     console.log(req.params);
     const bId = new BSON.ObjectId(req.params.contact_id)
@@ -47,7 +52,7 @@ export const getContactById = async (req,res,next) => {
     //query
     const result = await contactsCollection().findOne(contactToGet);
 
-    if(result) {
+    if (result) {
         console.log("Found a contact: ");
         res.send(result);
         console.log(result);
@@ -58,7 +63,7 @@ export const getContactById = async (req,res,next) => {
 
 /* --update-- */
 
-export const updateContactbyId = async (req,res,next) => {
+export const updateContactbyId = async (req, res, next) => {
     try {
         //build query
         const contactToFind = buildIdQuery(req.body.contactId)
@@ -89,15 +94,15 @@ export const updateContactbyId = async (req,res,next) => {
 
 
 /* --delete-- */
-export const deleteContactById = async (req,res,next) => {
-    try { 
+export const deleteContactById = async (req, res, next) => {
+    try {
         const contactToDelete = buildIdQuery(req.body.contactId);
 
         const result = await contactsCollection().deleteOne(contactToDelete)
         if (result.deletedCount === 0) {
             console.log(`Something went wrong :[`);
             res.json('Something went wrong');
-            
+
         } else {
             res.json('Success!');
         }

@@ -3,7 +3,7 @@ import swaggerAutogen from 'swagger-autogen';
 const doc = {
     info: {
         title: 'Contacts API',
-        description: 'Lengthy Description'
+        description: 'It\'s a contacts list, but also an API! Add, update, and delete all your friends and acquaintances!'
     },
     host: 'localhost:8080'
 };
