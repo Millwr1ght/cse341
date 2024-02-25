@@ -1,7 +1,7 @@
 import Router from 'express';
-//import * as baseController from '../controllers/index.js';
 import recipeRouter from './recipes.js';
 import swagger from './swagger.js';
+import cookbookRouter from './cookbooks.js';
 
 //main router + routes
 export const routes = Router();
@@ -14,6 +14,8 @@ routes.get('/', (req, res) => {
 
 //get all contacts
 routes.use('/recipes', recipeRouter);
+
+routes.use('/cookbooks', cookbookRouter);
 
 //get the api-doc
 routes.use('/api-docs', swagger);

@@ -1,16 +1,16 @@
-import { recipesCollection } from "../db/connection.js";
+import { cookbooksCollection } from "../db/connection.js";
 import { err400, err500, success204 } from "./statuses.js";
 import { buildIdQuery } from "../library/utils.js";
 import 'dotenv/config';
 
 /* --create-- */
-export const addRecipe = async (req, res, next) => {
+export const addCookbook = async (req, res, next) => {
     // make sure there's a body
     if (!req.body) { err400(res); }
 
     //make sure body has members
     if (!req.body.title || !req.body.book || !req.body.pageNumber || !req.body.type) {
-        err400(res, 'Recipe you are trying to add is missing information! make sure you have all fields (title, book, pageNumber, type')
+        err400(res, 'Cookbook you are trying to add is missing information! make sure you have all fields (title, book, pageNumber, type')
     }
 
     try {
@@ -21,14 +21,14 @@ export const addRecipe = async (req, res, next) => {
             type: req.body.type
         }
 
-        const result = await recipesCollection().insertOne(payload);
+        const result = await cookbooksCollection().insertOne(payload);
 
         if (result) {
             res.status(201)
                 .send({
-                    message: `New recipe added with _id: ${result.insertedId}`
+                    message: `New cookbook added with _id: ${result.insertedId}`
                 })
-            console.log(`New recipe added with _id: ${result.insertedId}`);
+            console.log(`New cookbook added with _id: ${result.insertedId}`);
         }
     } catch (error) {
         console.error(error);
@@ -38,48 +38,54 @@ export const addRecipe = async (req, res, next) => {
 
 
 /* --read-- */
-// get all documents form the recipes table
-export const getAllRecipes = async (req, res, next) => {
+// get all documents form the cookbooks table
+export const getAllCookbooks = async (req, res, next) => {
     //connect &query database
-    const result = await recipesCollection().find({});
+    try {
+        const result = await cookbooksCollection().find({});
 
-    //output result
-    if (result) {
-        //console.log(`Found the following recipe(s): `);
-        const results = await result.toArray();
-        res.status(200)
-            .send(results);
-    } else {
-        res.status(404)
-        console.log(`No recipes found.`);
+        //output result
+        if (result) {
+            const results = await result.toArray();
+            res.status(200)
+                .send(results);
+        } else {
+            res.status(404)
+                .send(`No cookbooks found.`)
+            console.log(`No cookbooks found.`);
+        }
+    } catch (error) {
+        console.log(error);
+        err500(res);
     }
+
 }
 
-export const getRecipeById = async (req, res, next) => {
+export const getCookbookById = async (req, res, next) => {
     //build query args
     console.log(req.params);
-    const recipeToGet = buildIdQuery(req.params.recipe_id)
+    const cookbookToGet = buildIdQuery(req.params.cookbook_id)
 
     //query
-    const result = await recipesCollection().findOne(recipeToGet);
+    const result = await cookbooksCollection().findOne(cookbookToGet);
 
     if (result) {
-        console.log("Found a recipe: ", result);
+        console.log("Found a cookbook: ", result);
         res.status(200)
             .send(result);
     } else {
         res.status(404)
-            .send("No recipes found :(")
+            .send("No cookbooks found :(")
     }
 }
 
 /* --update-- */
-export const updateRecipebyId = async (req, res, next) => {
+export const updateCookbookbyId = async (req, res, next) => {
     if (!req.body) { err400(res); }
 
     try {
         //build query
-        const recipeToFind = buildIdQuery(req.body.recipeId)
+        const cookbookToFind = buildIdQuery(req.body.cookbookId)
         //build update
         const update = {
             $set: {
@@ -91,11 +97,10 @@ export const updateRecipebyId = async (req, res, next) => {
         }
         const options = req.body.options;
         //send it
-        const result = await recipesCollection().findOneAndUpdate(recipeToFind, update, options);
+        const result = await cookbooksCollection().findOneAndUpdate(cookbookToFind, update, options);
         if (result) {
             success204(res);
         } else {
-            console.log(`Something went wrong :[`);
             err500(res);
         }
     } catch (error) {
@@ -105,13 +110,12 @@ export const updateRecipebyId = async (req, res, next) => {
 }
 
 /* --delete-- */
-export const deleteRecipeById = async (req, res, next) => {
+export const deleteCookbookById = async (req, res, next) => {
     try {
-        const recipeToDelete = buildIdQuery(req.body.recipeId);
+        const cookbookToDelete = buildIdQuery(req.body.cookbookId);
 
-        const result = await recipesCollection().deleteOne(recipeToDelete)
+        const result = await cookbooksCollection().deleteOne(cookbookToDelete)
         if (result.deletedCount === 0) {
-            console.log(`Something went wrong :[`);
             err500(res);
         } else {
             success204(res);

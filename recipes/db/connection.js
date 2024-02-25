@@ -35,7 +35,7 @@ const client = new MongoClient(uri, {
 });
 
 //setup db object
-let _db, _recipesCollection;
+let _db, _recipesCollection, _cookbooksCollection;
 
 export const dbConnect = async (callback) => {
     //connect to mongodb
@@ -57,7 +57,8 @@ export const dbConnect = async (callback) => {
         _db = client;
         callback ? callback(null, _db) : console.log('null');;
 
-        _recipesCollection = client.db(process.env.DB_NAME).collection("recipes")
+        _recipesCollection = client.db(process.env.DB_NAME).collection('recipes')
+        _cookbooksCollection = client.db(process.env.DB_NAME).collection('books')
 
         // make some calls, such as
         //await listDatabases(_db);
@@ -80,6 +81,13 @@ export const recipesCollection = () => {
         throw Error('Collection not found.')
     }
     return _recipesCollection;
+}
+
+export const cookbooksCollection = () => {
+    if (!_cookbooksCollection) {
+        throw Error('Collection not found.')
+    }
+    return _cookbooksCollection;
 }
 
 async function listDatabases(client) {
