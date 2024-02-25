@@ -40,37 +40,49 @@ export const addRecipe = async (req, res, next) => {
 /* --read-- */
 // get all documents form the recipes table
 export const getAllRecipes = async (req, res, next) => {
-    //connect &query database
-    const result = await recipesCollection().find({});
+    try {
+        //connect &query database
+        const result = await recipesCollection().find({});
 
-    //output result
-    if (result) {
-        //console.log(`Found the following recipe(s): `);
-        const results = await result.toArray();
-        res.status(200)
-            .send(results);
-    } else {
-        res.status(404)
-        console.log(`No recipes found.`);
+        //output result
+        if (result) {
+            //console.log(`Found the following recipe(s): `);
+            const results = await result.toArray();
+            res.status(200)
+                .send(results);
+        } else {
+            res.status(404)
+            console.log(`No recipes found.`);
+        }
+    } catch (error) {
+        console.log(error);
+        err500(res)
     }
+
 }
 
 export const getRecipeById = async (req, res, next) => {
-    //build query args
-    console.log(req.params);
-    const recipeToGet = buildIdQuery(req.params.recipe_id)
+    try {
+        //build query args
+        console.log(req.params);
+        const recipeToGet = buildIdQuery(req.params.recipe_id)
 
-    //query
-    const result = await recipesCollection().findOne(recipeToGet);
+        //query
+        const result = await recipesCollection().findOne(recipeToGet);
 
-    if (result) {
-        console.log("Found a recipe: ", result);
-        res.status(200)
-            .send(result);
-    } else {
-        res.status(404)
-            .send("No recipes found :(")
+        if (result) {
+            console.log("Found a recipe: ", result);
+            res.status(200)
+                .send(result);
+        } else {
+            res.status(404)
+                .send("No recipes found :(")
+        }
+    } catch (error) {
+        console.log(error);
+        err500(res)
     }
+
 }
 
 /* --update-- */

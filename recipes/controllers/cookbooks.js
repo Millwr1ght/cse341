@@ -62,21 +62,27 @@ export const getAllCookbooks = async (req, res, next) => {
 }
 
 export const getCookbookById = async (req, res, next) => {
-    //build query args
-    console.log(req.params);
-    const cookbookToGet = buildIdQuery(req.params.cookbook_id)
+    try {
+        //build query args
+        console.log(req.params);
+        const cookbookToGet = buildIdQuery(req.params.cookbook_id)
 
-    //query
-    const result = await cookbooksCollection().findOne(cookbookToGet);
+        //query
+        const result = await cookbooksCollection().findOne(cookbookToGet);
 
-    if (result) {
-        console.log("Found a cookbook: ", result);
-        res.status(200)
-            .send(result);
-    } else {
-        res.status(404)
-            .send("No cookbooks found :(")
+        if (result) {
+            console.log("Found a cookbook: ", result);
+            res.status(200)
+                .send(result);
+        } else {
+            res.status(404)
+                .send("No cookbooks found :(")
+        }
+    } catch (error) {
+        console.log(error);
+        err500(res)
     }
+
 }
 
 /* --update-- */
