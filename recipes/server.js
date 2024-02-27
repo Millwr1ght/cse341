@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 import routes from "./routes/index.js";
 import { dbConnect } from "./db/connection.js";
 import middlewareWrapper from "cors";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000;
 
 app
     .use(middlewareWrapper())
+    .use(bodyParser.json())
     .use((req, res, next) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         next();

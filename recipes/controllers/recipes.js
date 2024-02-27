@@ -9,10 +9,10 @@ export const addRecipe = async (req, res, next) => {
     if (!req.body) { err400(res); }
 
     //make sure body has members
-    if (!req.body.title || !req.body.book || !req.body.pageNumber || !req.body.type) {
-        err400(res, 'Recipe you are trying to add is missing information! make sure you have all fields (title, book, pageNumber, type')
-    }
-
+    // if (!req.body.title || !req.body.book || !req.body.pageNumber || !req.body.type) {
+    //     err400(res, 'Recipe you are trying to add is missing information! make sure you have all fields (title, book, pageNumber, type')
+    // }
+    console.log(req);
     try {
         const payload = {
             title: req.body.title,
