@@ -1,18 +1,18 @@
 // Recipe document schema
 export const /*type*/ Recipe = {
-    title: {
+    $title: {
         type: String
     },
-    pageNumber: {
+    $pageNumber: {
         type: Number
     },
-    book: {
+    $book: {
         type: String
     },
-    type: {
+    $type: {
         type: String
     },
-    allergens: {
+    $allergens: {
         dairy: { type: Boolean },
         peanuts: { type: Boolean },
         treenuts: { type: Boolean },

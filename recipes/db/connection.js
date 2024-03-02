@@ -1,4 +1,4 @@
-import { MongoClient, ServerApiVersion, ObjectId, BSON } from "mongodb";
+import { MongoClient, ServerApiVersion } from "mongodb";
 import 'dotenv/config';
 
 const uri = process.env.DB_URI;

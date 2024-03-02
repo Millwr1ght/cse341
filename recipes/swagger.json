@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Recipes API",
-    "description": "It's my collection of recipes, but now on mongoDB and accessible via this API!",
+    "title": "Cookbook Collection API",
+    "description": "It's my collection of recipes and cookbooks, but now on mongoDB and accessible via this API!",
     "version": "1.0.0"
   },
   "host": "localhost:8080",
@@ -10,13 +10,54 @@
   "schemes": [
     "http"
   ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "authorizationUrl": "https://github.com/login/oauth/authorize",
+      "flow": "implicit",
+      "scopes": {}
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/": {
       "get": {
         "description": "",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/oauth-callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -28,34 +69,15 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Add new recipe.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "book": {
-                  "example": "any"
-                },
-                "pageNumber": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/AddRecipe"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "201": {
             "description": "Created"
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }
@@ -101,37 +123,15 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Update recipe.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "recipeId": {
-                  "example": "any"
-                },
-                "title": {
-                  "example": "any"
-                },
-                "book": {
-                  "example": "any"
-                },
-                "pageNumber": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                },
-                "options": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/UpdateRecipe"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -154,11 +154,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -170,22 +167,9 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Add new cookbook.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "title": {
-                  "example": "any"
-                },
-                "book": {
-                  "example": "any"
-                },
-                "pageNumber": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/AddCookbook"
             }
           }
         ],
@@ -237,28 +221,9 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Update cookbook.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "cookbookId": {
-                  "example": "any"
-                },
-                "title": {
-                  "example": "any"
-                },
-                "book": {
-                  "example": "any"
-                },
-                "pageNumber": {
-                  "example": "any"
-                },
-                "type": {
-                  "example": "any"
-                },
-                "options": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/UpdateCookbook"
             }
           }
         ],
@@ -302,6 +267,302 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "Cookbook": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "1001 Bad Recipes"
+        },
+        "subtitle": {
+          "type": "string",
+          "example": "They're Really, Really Bad"
+        },
+        "author": {
+          "type": "string",
+          "example": "Hans Andersen"
+        },
+        "pictureDescription": {
+          "type": "string",
+          "example": "N/A"
+        }
+      }
+    },
+    "AddCookbook": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "1001 Bad Recipes"
+        },
+        "subtitle": {
+          "type": "string",
+          "example": "They're Really, Really Bad"
+        },
+        "author": {
+          "type": "string",
+          "example": "Hans Andersen"
+        },
+        "pictureDescription": {
+          "type": "string",
+          "example": "N/A"
+        }
+      }
+    },
+    "UpdateCookbook": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1234"
+        },
+        "title": {
+          "type": "string",
+          "example": "1001 Bad Recipes"
+        },
+        "subtitle": {
+          "type": "string",
+          "example": "Like, Really, Really, Really Bad"
+        },
+        "author": {
+          "type": "string",
+          "example": "Khans Andersen"
+        },
+        "pictureDescription": {
+          "type": "string",
+          "example": "N/A"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Recipe": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Carrot Bran Muffins"
+        },
+        "book": {
+          "type": "string",
+          "example": "1001 Bad Recipes"
+        },
+        "pageNumber": {
+          "type": "number",
+          "example": 24
+        },
+        "type": {
+          "type": "string",
+          "example": "Side"
+        },
+        "allergens": {
+          "type": "object",
+          "properties": {
+            "dairy": {
+              "type": "boolean",
+              "example": false
+            },
+            "peanuts": {
+              "type": "boolean",
+              "example": false
+            },
+            "treenuts": {
+              "type": "boolean",
+              "example": false
+            },
+            "eggs": {
+              "type": "boolean",
+              "example": false
+            },
+            "meatNotFish": {
+              "type": "boolean",
+              "example": false
+            },
+            "fish": {
+              "type": "boolean",
+              "example": false
+            },
+            "shellfish": {
+              "type": "boolean",
+              "example": false
+            },
+            "gluten": {
+              "type": "boolean",
+              "example": false
+            },
+            "soy": {
+              "type": "boolean",
+              "example": false
+            },
+            "sesame": {
+              "type": "boolean",
+              "example": false
+            },
+            "alcohol": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        }
+      }
+    },
+    "AddRecipe": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Carrot Bran Muffins"
+        },
+        "book": {
+          "type": "string",
+          "example": "1001 Bad Recipes"
+        },
+        "pageNumber": {
+          "type": "number",
+          "example": 24
+        },
+        "type": {
+          "type": "string",
+          "example": "Side"
+        },
+        "allergens": {
+          "type": "object",
+          "properties": {
+            "dairy": {
+              "type": "boolean",
+              "example": false
+            },
+            "peanuts": {
+              "type": "boolean",
+              "example": false
+            },
+            "treenuts": {
+              "type": "boolean",
+              "example": false
+            },
+            "eggs": {
+              "type": "boolean",
+              "example": false
+            },
+            "meatNotFish": {
+              "type": "boolean",
+              "example": false
+            },
+            "fish": {
+              "type": "boolean",
+              "example": false
+            },
+            "shellfish": {
+              "type": "boolean",
+              "example": false
+            },
+            "gluten": {
+              "type": "boolean",
+              "example": false
+            },
+            "soy": {
+              "type": "boolean",
+              "example": false
+            },
+            "sesame": {
+              "type": "boolean",
+              "example": false
+            },
+            "alcohol": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        }
+      },
+      "required": [
+        "title",
+        "book",
+        "pageNumber",
+        "type",
+        "allergens"
+      ]
+    },
+    "UpdateRecipe": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "1234"
+        },
+        "title": {
+          "type": "string",
+          "example": "Carrot Bran Muffins"
+        },
+        "book": {
+          "type": "string",
+          "example": "1001 Bad Recipes"
+        },
+        "pageNumber": {
+          "type": "number",
+          "example": 24
+        },
+        "type": {
+          "type": "string",
+          "example": "Side"
+        },
+        "allergens": {
+          "type": "object",
+          "properties": {
+            "dairy": {
+              "type": "boolean",
+              "example": false
+            },
+            "peanuts": {
+              "type": "boolean",
+              "example": false
+            },
+            "treenuts": {
+              "type": "boolean",
+              "example": false
+            },
+            "eggs": {
+              "type": "boolean",
+              "example": false
+            },
+            "meatNotFish": {
+              "type": "boolean",
+              "example": false
+            },
+            "fish": {
+              "type": "boolean",
+              "example": false
+            },
+            "shellfish": {
+              "type": "boolean",
+              "example": false
+            },
+            "gluten": {
+              "type": "boolean",
+              "example": false
+            },
+            "soy": {
+              "type": "boolean",
+              "example": false
+            },
+            "sesame": {
+              "type": "boolean",
+              "example": false
+            },
+            "alcohol": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
     }
   }
 }

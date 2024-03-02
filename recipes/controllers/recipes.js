@@ -5,20 +5,28 @@ import 'dotenv/config';
 
 /* --create-- */
 export const addRecipe = async (req, res, next) => {
+    /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Add new recipe.',
+            schema: { $ref: '#/definitions/AddRecipe' }
+    } */
+
+
     // make sure there's a body
     if (!req.body) { err400(res); }
 
     //make sure body has members
-    // if (!req.body.title || !req.body.book || !req.body.pageNumber || !req.body.type) {
-    //     err400(res, 'Recipe you are trying to add is missing information! make sure you have all fields (title, book, pageNumber, type')
-    // }
-    console.log(req);
+    if (!req.body.title || !req.body.book || !req.body.pageNumber || !req.body.type) {
+        err400(res, 'Recipe you are trying to add is missing information! make sure you have all fields (title, book, pageNumber, type')
+    }
+
     try {
         const payload = {
             title: req.body.title,
             book: req.body.book,
             pageNumber: req.body.pageNumber,
-            type: req.body.type
+            type: req.body.type,
+            allergens: req.body.allergens,
         }
 
         const result = await recipesCollection().insertOne(payload);
@@ -87,6 +95,14 @@ export const getRecipeById = async (req, res, next) => {
 
 /* --update-- */
 export const updateRecipebyId = async (req, res, next) => {
+    /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Update recipe.',
+            schema: { $ref: '#/definitions/UpdateRecipe' }
+    } */
+
+
+
     if (!req.body) { err400(res); }
 
     try {

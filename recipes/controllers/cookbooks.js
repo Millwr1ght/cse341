@@ -5,6 +5,12 @@ import 'dotenv/config';
 
 /* --create-- */
 export const addCookbook = async (req, res, next) => {
+    /*  #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Add new cookbook.',
+        schema: { $ref: '#/definitions/AddCookbook' }
+    } */
+
     // make sure there's a body
     if (!req.body) { err400(res); }
 
@@ -87,6 +93,12 @@ export const getCookbookById = async (req, res, next) => {
 
 /* --update-- */
 export const updateCookbookbyId = async (req, res, next) => {
+    /*  #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Update cookbook.',
+        schema: { $ref: '#/definitions/UpdateCookbook' }
+    } */
+
     if (!req.body) { err400(res); }
 
     try {

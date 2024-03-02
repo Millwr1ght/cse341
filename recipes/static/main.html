@@ -4,17 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        html {
-            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-        }
+        html { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; }
+        .unauth { display: block; }
+        .auth { display: none; }
     </style>
     <title>Cookbooks!</title>
 </head>
 <body>
-    <div>
-        <h1>hello world!</h1>
-        <h2> welcome to my collection of cookbooks</h2>
+    <h1>hello world!</h1>
+    <h2> welcome to my collection of cookbooks</h2>
+    <div class="content unauth">
         <a href="/auth">please login with github to continue!</a>
     </div>
+    <div class="content auth">
+        <a href="/api-docs">how to use this api</a>
+    </div>
 </body>
+<script>
+    const URL_PARAMS = new URLSearchParams(window.location.search);
+    const TOKEN = URL_PARAMS.get('token');
+
+    //show
+    const show = (selector) => {
+        if (!document.querySelector(selector)) {
+            return
+        }
+        document.querySelector(selector).style.display = 'block';
+    };
+
+    //hide
+    const hide = (selector) => {
+        if (!document.querySelector(selector)) {
+            return
+        }
+        document.querySelector(selector).style = 'display: none';
+    };
+
+    if (TOKEN) {
+        hide('.unauth');
+        show('.auth');
+    }
+</script>
 </html>
