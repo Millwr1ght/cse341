@@ -31,11 +31,14 @@ const doc = {
             pictureDescription: 'N/A',
         },
         UpdateCookbook: {
-            $id: '1234',
+            $cookbookId: '1234',
             title: '1001 Bad Recipes',
             subtitle: 'Like, Really, Really, Really Bad',
             author: 'Khans Andersen',
             pictureDescription: 'N/A',
+        },
+        DeleteCookbook: {
+            $cookbookId: '1234'
         },
         Recipe: {
             title: 'Carrot Bran Muffins',
@@ -76,7 +79,7 @@ const doc = {
             },
         },
         UpdateRecipe: {
-            $id: '1234',
+            $recipeId: '1234',
             title: 'Carrot Bran Muffins',
             book: '1001 Bad Recipes',
             pageNumber: 24,
@@ -95,7 +98,9 @@ const doc = {
                 alcohol: false,
             },
         },
-
+        DeleteRecipe: {
+            $recipeId: '1234'
+        },
     },
 
 };

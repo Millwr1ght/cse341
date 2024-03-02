@@ -143,13 +143,9 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Delete recipe.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "recipeId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/DeleteRecipe"
             }
           }
         ],
@@ -241,13 +237,9 @@
           {
             "name": "body",
             "in": "body",
+            "description": "Delete recipe.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "cookbookId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/DeleteRecipe"
             }
           }
         ],
@@ -315,7 +307,7 @@
     "UpdateCookbook": {
       "type": "object",
       "properties": {
-        "id": {
+        "cookbookId": {
           "type": "string",
           "example": "1234"
         },
@@ -337,7 +329,19 @@
         }
       },
       "required": [
-        "id"
+        "cookbookId"
+      ]
+    },
+    "DeleteCookbook": {
+      "type": "object",
+      "properties": {
+        "cookbookId": {
+          "type": "string",
+          "example": "1234"
+        }
+      },
+      "required": [
+        "cookbookId"
       ]
     },
     "Recipe": {
@@ -490,7 +494,7 @@
     "UpdateRecipe": {
       "type": "object",
       "properties": {
-        "id": {
+        "recipeId": {
           "type": "string",
           "example": "1234"
         },
@@ -561,7 +565,19 @@
         }
       },
       "required": [
-        "id"
+        "recipeId"
+      ]
+    },
+    "DeleteRecipe": {
+      "type": "object",
+      "properties": {
+        "recipeId": {
+          "type": "string",
+          "example": "1234"
+        }
+      },
+      "required": [
+        "recipeId"
       ]
     }
   }

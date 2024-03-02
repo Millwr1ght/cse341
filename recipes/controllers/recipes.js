@@ -134,6 +134,13 @@ export const updateRecipebyId = async (req, res, next) => {
 
 /* --delete-- */
 export const deleteRecipeById = async (req, res, next) => {
+    /*  #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Delete recipe.',
+            schema: { $ref: '#/definitions/DeleteRecipe' }
+    } */
+
+
     try {
         const recipeToDelete = buildIdQuery(req.body.recipeId);
 

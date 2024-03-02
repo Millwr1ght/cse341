@@ -24,7 +24,8 @@ export const addCookbook = async (req, res, next) => {
             title: req.body.title,
             book: req.body.book,
             pageNumber: req.body.pageNumber,
-            type: req.body.type
+            type: req.body.type,
+            allergens: req.body.allergens,
         }
 
         const result = await cookbooksCollection().insertOne(payload);
@@ -129,6 +130,13 @@ export const updateCookbookbyId = async (req, res, next) => {
 
 /* --delete-- */
 export const deleteCookbookById = async (req, res, next) => {
+    /*  #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Delete recipe.',
+        schema: { $ref: '#/definitions/DeleteRecipe' }
+    } */
+
+
     try {
         const cookbookToDelete = buildIdQuery(req.body.cookbookId);
 
