@@ -39,7 +39,7 @@ export const addRecipe = async (req, res, next) => {
             console.log(`New recipe added with _id: ${result.insertedId}`);
         }
     } catch (error) {
-        console.error(error);
+        console.error('POST error: ', error);
         err500(res);
     }
 }
@@ -63,7 +63,7 @@ export const getAllRecipes = async (req, res, next) => {
             console.log(`No recipes found.`);
         }
     } catch (error) {
-        console.log(error);
+        console.log('GET ALL error: ', error);
         err500(res)
     }
 
@@ -87,7 +87,7 @@ export const getRecipeById = async (req, res, next) => {
                 .send("No recipes found :(")
         }
     } catch (error) {
-        console.log(error);
+        console.log('GET error: ', error);
         err500(res)
     }
 
@@ -128,7 +128,7 @@ export const updateRecipebyId = async (req, res, next) => {
             err500(res);
         }
     } catch (error) {
-        console.error(error);
+        console.error('PUT error: ', error);
         err500(res);
     }
 }
@@ -153,7 +153,7 @@ export const deleteRecipeById = async (req, res, next) => {
             success204(res);
         }
     } catch (error) {
-        console.error(error);
+        console.error('DELETE error: ', error);
         err500(res);
     }
 }
