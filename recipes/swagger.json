@@ -5,7 +5,7 @@
     "description": "It's my collection of recipes and cookbooks, but now on mongoDB and accessible via this API!",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "https://cookbookcollection.onrender.com",
   "basePath": "/",
   "schemes": [
     "http"
