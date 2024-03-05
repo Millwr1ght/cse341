@@ -114,7 +114,8 @@ export const updateRecipebyId = async (req, res, next) => {
                 title: req.body.title,
                 book: req.body.book,
                 pageNumber: req.body.pageNumber,
-                type: req.body.type
+                type: req.body.type,
+                allergens: req.body.allergens,
             }
         }
         const options = req.body.options;

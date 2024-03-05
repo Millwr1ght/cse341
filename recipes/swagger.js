@@ -5,7 +5,7 @@ const doc = {
         title: 'Cookbook Collection API',
         description: 'It\'s my collection of recipes and cookbooks, but now on mongoDB and accessible via this API!'
     },
-    host: 'localhost:8080',
+    host: 'https://cookbookcollection.onrender.com', // todo: not be localhost 
     consumes: ['application/json'],
     produces: ['application/json'],
     securityDefinitions: {

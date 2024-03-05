@@ -15,17 +15,16 @@ export const addCookbook = async (req, res, next) => {
     if (!req.body) { err400(res); }
 
     //make sure body has members
-    if (!req.body.title || !req.body.book || !req.body.pageNumber || !req.body.type) {
-        err400(res, 'Cookbook you are trying to add is missing information! make sure you have all fields (title, book, pageNumber, type')
+    if (!req.body.title || !req.body.author) {
+        err400(res, 'Cookbook you are trying to add is missing information! Make sure you have all required fields (title, author)')
     }
 
     try {
         const payload = {
             title: req.body.title,
-            book: req.body.book,
-            pageNumber: req.body.pageNumber,
-            type: req.body.type,
-            allergens: req.body.allergens,
+            subtitle: req.body.subtitle,
+            author: req.body.author,
+            pictureDescription: req.body.pictureDescription,
         }
 
         const result = await cookbooksCollection().insertOne(payload);
@@ -109,9 +108,9 @@ export const updateCookbookbyId = async (req, res, next) => {
         const update = {
             $set: {
                 title: req.body.title,
-                book: req.body.book,
-                pageNumber: req.body.pageNumber,
-                type: req.body.type
+                subtitle: req.body.subtitle,
+                author: req.body.author,
+                pictureDescription: req.body.pictureDescription,
             }
         }
         const options = req.body.options;
@@ -133,7 +132,7 @@ export const deleteCookbookById = async (req, res, next) => {
     /*  #swagger.parameters['body'] = {
         in: 'body',
         description: 'Delete recipe.',
-        schema: { $ref: '#/definitions/DeleteRecipe' }
+        schema: { $ref: '#/definitions/DeleteCookbook' }
     } */
 
 
@@ -141,6 +140,9 @@ export const deleteCookbookById = async (req, res, next) => {
         const cookbookToDelete = buildIdQuery(req.body.cookbookId);
 
         const result = await cookbooksCollection().deleteOne(cookbookToDelete)
+
+        console.log(result);
+
         if (result.deletedCount === 0) {
             err500(res);
         } else {

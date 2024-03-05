@@ -239,7 +239,7 @@
             "in": "body",
             "description": "Delete recipe.",
             "schema": {
-              "$ref": "#/definitions/DeleteRecipe"
+              "$ref": "#/definitions/DeleteCookbook"
             }
           }
         ],
