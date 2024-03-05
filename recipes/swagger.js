@@ -5,7 +5,7 @@ const doc = {
         title: 'Cookbook Collection API',
         description: 'It\'s my collection of recipes and cookbooks, but now on mongoDB and accessible via this API!'
     },
-    host: 'https://cookbookcollection.onrender.com', // todo: not be localhost 
+    host: 'https://cookbookcollection.onrender.com', // TODO: not be localhost 
     consumes: ['application/json'],
     produces: ['application/json'],
     securityDefinitions: {
@@ -13,7 +13,7 @@ const doc = {
             type: 'oauth2',
             authorizationUrl: 'https://github.com/login/oauth/authorize',
             flow: 'implicit',
-            scopes: {},
+            scopes: {}, //TODO: this
         }
     },
     definitions: {

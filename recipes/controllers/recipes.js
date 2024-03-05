@@ -44,7 +44,6 @@ export const addRecipe = async (req, res, next) => {
     }
 }
 
-
 /* --read-- */
 // get all documents form the recipes table
 export const getAllRecipes = async (req, res, next) => {

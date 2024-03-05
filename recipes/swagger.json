@@ -8,7 +8,7 @@
   "host": "https://cookbookcollection.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "securityDefinitions": {
     "OAuth2": {
