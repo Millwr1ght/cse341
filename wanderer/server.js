@@ -23,7 +23,7 @@ app
 
 dbConnect((err, mongodb) => {
     if (err) {
-        console.log(err)
+        console.log(`[server]: server connection error: ${err}`)
     } else {
         app.listen(port, () => {
             console.log(`[server]: App listening on port ${port}`);
