@@ -15,7 +15,7 @@ const client = new MongoClient(uri, {
 //setup db object
 let _db, _recipesCollection, _cookbooksCollection;
 
-export const dbConnect = async (callback) => {
+export const dbConnect = async (callback = (err, _db) => { return }) => {
     //connect to mongodb
     //callback should take params (err, db_crawler)
 
