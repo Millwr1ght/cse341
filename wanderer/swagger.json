@@ -10,10 +10,6 @@
     {
       "url": "https://wanderer-dymk.onrender.com",
       "description": "prod"
-    },
-    {
-      "url": "http://localhost:8080",
-      "description": "dev"
     }
   ],
   "basePath": "/",

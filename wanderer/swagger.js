@@ -14,10 +14,10 @@ const doc = {
             url: 'https://wanderer-dymk.onrender.com',
             description: 'prod'
         },
-        {
-            url: 'http://localhost:8080',
-            description: 'dev'
-        },
+        // {
+        //     url: 'http://localhost:8080',
+        //     description: 'dev'
+        // },
     ],
     consumes: ['application/json'],
     produces: ['application/json'],
