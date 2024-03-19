@@ -6,16 +6,17 @@ const encounterRouter = Router();
 encounterRouter.get('/', encountersController.getAllEncounters);
 
 /* --create-- */
-encounterRouter.post('/add', encountersController.addEncounter)
+encounterRouter.post('/', encountersController.addEncounter)
+encounterRouter.post('/submit', encountersController.protoEncounter)
 
 /* --read-- */
 encounterRouter.get('/:encounter_id', encountersController.getEncounterById);
 
 /* --update-- */
-encounterRouter.put('/update/:encounter_id', encountersController.updateEncounter)
+encounterRouter.put('/', encountersController.updateEncounter)
 
 /* --delete-- */
-encounterRouter.delete('/delete/:encounter_id', encountersController.deleteEncounter)
+encounterRouter.delete('/:encounter_id', encountersController.deleteEncounter)
 
 
 export default encounterRouter;
