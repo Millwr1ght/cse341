@@ -35,7 +35,6 @@ routes.get('/coffee', (req, res) => {
         res.status(418)
             .send("418 error. \nsorry dave, i'm afraid i can't do that")
     }
-
 })
 
 export default routes;
