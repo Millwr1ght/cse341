@@ -55,10 +55,36 @@
             "description": ""
           }
         }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
       }
     },
-    "/user/add": {
-      "post": {
+    "/user/login": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "get": {
         "description": "",
         "responses": {
           "default": {
@@ -83,10 +109,8 @@
             "description": ""
           }
         }
-      }
-    },
-    "/user/update/{user_id}": {
-      "put": {
+      },
+      "delete": {
         "description": "",
         "parameters": [
           {
@@ -103,12 +127,22 @@
         }
       }
     },
-    "/user/delete/{user_id}": {
-      "delete": {
+    "/user/list": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/user/top/{stat}": {
+      "get": {
         "description": "",
         "parameters": [
           {
-            "name": "user_id",
+            "name": "stat",
             "in": "path",
             "required": true,
             "type": "string"
@@ -129,11 +163,27 @@
             "description": ""
           }
         }
-      }
-    },
-    "/items/add": {
+      },
       "post": {
         "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/items/{item_id}/upload": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -157,9 +207,7 @@
             "description": ""
           }
         }
-      }
-    },
-    "/items/update/{item_id}": {
+      },
       "put": {
         "description": "",
         "parameters": [
@@ -175,9 +223,7 @@
             "description": ""
           }
         }
-      }
-    },
-    "/items/delete/{item_id}": {
+      },
       "delete": {
         "description": "",
         "parameters": [
@@ -203,10 +249,16 @@
             "description": ""
           }
         }
-      }
-    },
-    "/maps/add": {
+      },
       "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
         "description": "",
         "responses": {
           "default": {
@@ -231,27 +283,7 @@
             "description": ""
           }
         }
-      }
-    },
-    "/maps/update/{map_id}": {
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "map_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/maps/delete/{map_id}": {
+      },
       "delete": {
         "description": "",
         "parameters": [
@@ -277,9 +309,25 @@
             "description": ""
           }
         }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
       }
     },
-    "/encouters/add": {
+    "/encouters/submit": {
       "post": {
         "description": "",
         "responses": {
@@ -305,27 +353,7 @@
             "description": ""
           }
         }
-      }
-    },
-    "/encouters/update/{encounter_id}": {
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "encounter_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/encouters/delete/{encounter_id}": {
+      },
       "delete": {
         "description": "",
         "parameters": [
