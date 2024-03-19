@@ -51,8 +51,11 @@
       "get": {
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -131,8 +134,11 @@
       "get": {
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -301,7 +307,7 @@
         }
       }
     },
-    "/encouters/": {
+    "/encounters/": {
       "get": {
         "description": "",
         "responses": {
@@ -327,7 +333,7 @@
         }
       }
     },
-    "/encouters/submit": {
+    "/encounters/submit": {
       "post": {
         "description": "",
         "responses": {
@@ -337,7 +343,7 @@
         }
       }
     },
-    "/encouters/{encounter_id}": {
+    "/encounters/{encounter_id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -381,5 +387,6 @@
         }
       }
     }
-  }
+  },
+  "url": "wanderer-dymk.onrender.com"
 }
