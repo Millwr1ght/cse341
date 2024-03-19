@@ -5,6 +5,14 @@ import mapRouter from './maps.js';
 import userRouter from './users.js';
 import encounterRouter from './encounters.js';
 
+//set up html delivery
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
 //main router + routes
 const routes = Router();
 
@@ -12,7 +20,7 @@ const routes = Router();
 routes.get('/', (req, res) => {
     console.log('[server]: token: ', req.query.token);
 
-    res.status(200).send('welcome!')
+    res.status(200).sendFile(path.join(__dirname, '../static/main.html'))
 });
 
 //database collections
