@@ -9,13 +9,23 @@ const doc = {
         "https",
         "http",
     ],
+    host: 'wanderer-dymk.onrender.com',
     servers: [
         {
-            url: 'https://wanderer-dymk.onrender.com',
-            description: 'prod'
+            url: '{protocol}://wanderer-dymk.onrender.com',
+            description: 'prod',
+            variables: {
+                protocol: {
+                    enum: [
+                        'http',
+                        'https',
+                    ],
+                    default: 'https'
+                }
+            }
         },
         // {
-        //     url: 'http://localhost:8080',
+        //     url: 'localhost:8080',
         //     description: 'dev'
         // },
     ],
