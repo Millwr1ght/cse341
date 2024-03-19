@@ -5,7 +5,8 @@ const doc = {
         title: 'Wanderer API',
         description: 'Get game info from the database'
     },
-    host: 'localhost:8080',
+    //host: 'localhost:8080',
+    host: 'https://wanderer-dymk.onrender.com',
     consumes: ['application/json'],
     produces: ['application/json'],
 };
