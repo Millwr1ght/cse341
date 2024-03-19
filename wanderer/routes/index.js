@@ -16,11 +16,12 @@ const __dirname = path.dirname(__filename);
 //main router + routes
 const routes = Router();
 
-// on the home page, show the name of someone I know
+//the home page
 routes.get('/', (req, res) => {
     console.log('[server]: token: ', req.query.token);
 
-    res.status(200).sendFile(path.join(__dirname, '../static/main.html'))
+    res.status(200)
+        .sendFile(path.join(__dirname, '../static/index.html'))
 });
 
 //database collections
