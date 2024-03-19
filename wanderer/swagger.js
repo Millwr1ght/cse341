@@ -5,6 +5,10 @@ const doc = {
         title: 'Wanderer API',
         description: 'Get game info from the database'
     },
+    schemes: [
+        "https",
+        "http",
+    ],
     servers: [
         {
             url: 'https://wanderer-dymk.onrender.com',
