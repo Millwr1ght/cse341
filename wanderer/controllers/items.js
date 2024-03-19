@@ -4,6 +4,8 @@ import 'dotenv/config';
 
 export const addItem = (req, res) => { /* */ }
 
+export const addImage = (req, res) => { /* */ }
+
 export const getAllItems = (req, res) => { /* */ }
 
 export const getItemById = (req, res) => { /* */ }

@@ -6,16 +6,18 @@ const itemRouter = Router();
 itemRouter.get('/', itemsController.getAllItems);
 
 /* --create-- */
-itemRouter.post('/add', itemsController.addItem)
+itemRouter.post('/', itemsController.addItem)
+
+itemRouter.post('/:item_id/upload', itemsController.addImage)
 
 /* --read-- */
 itemRouter.get('/:item_id', itemsController.getItemById);
 
 /* --update-- */
-itemRouter.put('/update/:item_id', itemsController.updateItem)
+itemRouter.put('/:item_id', itemsController.updateItem)
 
 /* --delete-- */
-itemRouter.delete('/delete/:item_id', itemsController.deleteItem)
+itemRouter.delete('/:item_id', itemsController.deleteItem)
 
 
 export default itemRouter;
