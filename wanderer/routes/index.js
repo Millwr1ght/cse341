@@ -31,7 +31,7 @@ routes.use('/items', itemRouter);
 
 routes.use('/maps', mapRouter);
 
-routes.use('/encouters', encounterRouter);
+routes.use('/encounters', encounterRouter);
 
 //get the api-doc
 routes.use('/api-docs', swagger);
