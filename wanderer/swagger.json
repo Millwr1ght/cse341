@@ -5,9 +5,20 @@
     "description": "Get game info from the database",
     "version": "1.0.0"
   },
-  "host": "wanderer-dymk.onrender.com",
+  "host": "localhost:3000",
+  "servers": [
+    {
+      "url": "https://wanderer-dymk.onrender.com",
+      "description": "prod"
+    },
+    {
+      "url": "http://localhost:8080",
+      "description": "dev"
+    }
+  ],
   "basePath": "/",
   "schemes": [
+    "https",
     "http"
   ],
   "consumes": [
