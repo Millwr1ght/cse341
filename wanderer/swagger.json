@@ -5,7 +5,7 @@
     "description": "Get game info from the database",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "wanderer-dymk.onrender.com",
   "basePath": "/",
   "schemes": [
     "http"
@@ -387,6 +387,5 @@
         }
       }
     }
-  },
-  "url": "wanderer-dymk.onrender.com"
+  }
 }
