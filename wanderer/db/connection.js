@@ -3,27 +3,27 @@ import 'dotenv/config';
 
 const uri = process.env.DB_URI;
 
-const newUser = {
-    "_id": 1,
-    "professionalName": "Fname Lname",
-    "base64Image": "img",
-    "nameLink": {
-        "firstName": "Fname",
-        "url": "localhost:8080/"
-    },
-    "primaryDescription": "Proto Desc",
-    "workDescription1": "Work 1",
-    "workDescription2": "Work 2",
-    "linkTitleText": "Title Text",
-    "linkedInLink": {
-        "text": "linkedIn",
-        "link": "#"
-    },
-    "githubLink": {
-        "text": "github",
-        "link": "#"
-    }
-}
+// const newUser = {
+//     "_id": 1,
+//     "professionalName": "Fname Lname",
+//     "base64Image": "img",
+//     "nameLink": {
+//         "firstName": "Fname",
+//         "url": "localhost:8080/"
+//     },
+//     "primaryDescription": "Proto Desc",
+//     "workDescription1": "Work 1",
+//     "workDescription2": "Work 2",
+//     "linkTitleText": "Title Text",
+//     "linkedInLink": {
+//         "text": "linkedIn",
+//         "link": "#"
+//     },
+//     "githubLink": {
+//         "text": "github",
+//         "link": "#"
+//     }
+// }
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
