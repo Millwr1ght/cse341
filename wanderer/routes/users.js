@@ -5,17 +5,25 @@ const userRouter = Router();
 
 userRouter.get('/', usersController.getAllUsers);
 
+/* --auth-- */
+userRouter.get('/login', usersController.logInUser);
+userRouter.get('/logout', usersController.logOutUser);
+
 /* --create-- */
-userRouter.post('/add', usersController.addUser)
+userRouter.post('/', usersController.addUser)
 
 /* --read-- */
 userRouter.get('/:user_id', usersController.getUserById);
 
+userRouter.get('/list', usersController.getAllUsers);
+
+userRouter.get('/top/:stat', usersController.getTopUsers);
+
 /* --update-- */
-userRouter.put('/update/:user_id', usersController.updateUser)
+userRouter.put('/', usersController.updateUser)
 
 /* --delete-- */
-userRouter.delete('/delete/:user_id', usersController.deleteUser)
+userRouter.delete('/:user_id', usersController.deleteUser)
 
 
 export default userRouter;
