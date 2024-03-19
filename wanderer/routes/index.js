@@ -1,5 +1,9 @@
 import Router from 'express';
 import swagger from './swagger.js';
+import itemRouter from './items.js';
+import mapRouter from './maps.js';
+import userRouter from './users.js';
+import encounterRouter from './encounters.js';
 
 //main router + routes
 const routes = Router();
@@ -11,6 +15,14 @@ routes.get('/', (req, res) => {
     res.status(200).send('welcome!')
 });
 
+//database collections
+routes.use('/user', userRouter);
+
+routes.use('/items', itemRouter);
+
+routes.use('/maps', mapRouter);
+
+routes.use('/encouters', encounterRouter);
 
 //get the api-doc
 routes.use('/api-docs', swagger);
