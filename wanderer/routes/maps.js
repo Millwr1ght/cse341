@@ -6,16 +6,16 @@ const mapRouter = Router();
 mapRouter.get('/', mapsController.getAllMaps);
 
 /* --create-- */
-mapRouter.post('/add', mapsController.addMap)
+mapRouter.post('/', mapsController.addMap)
 
 /* --read-- */
 mapRouter.get('/:map_id', mapsController.getMapById);
 
 /* --update-- */
-mapRouter.put('/update/:map_id', mapsController.updateMap)
+mapRouter.put('/', mapsController.updateMap)
 
 /* --delete-- */
-mapRouter.delete('/delete/:map_id', mapsController.deleteMap)
+mapRouter.delete('/:map_id', mapsController.deleteMap)
 
 
 export default mapRouter;
