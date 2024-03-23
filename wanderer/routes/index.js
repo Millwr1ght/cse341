@@ -38,6 +38,7 @@ routes.use('/api-docs', swagger);
 
 //make coffee
 routes.get('/coffee', (req, res) => {
+    //except don't
     let thisAppCanMakeCoffee = false;
     if (thisAppCanMakeCoffee) {
         res.send(200).send("please wait for assistance")

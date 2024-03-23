@@ -1,9 +1,9 @@
-import express from "express";
-import * as dotenv from "dotenv";
-import routes from "./routes/index.js";
-import { dbConnect } from "./db/connection.js";
-import middlewareWrapper from "cors";
-import bodyParser from "body-parser";
+import express from 'express';
+import * as dotenv from 'dotenv';
+import db from './db/mongoose.js';
+import middlewareWrapper from 'cors';
+import bodyParser from 'body-parser';
+import routes from './routes/index.js';
 
 dotenv.config();
 
@@ -19,14 +19,12 @@ app
     })
     .use('/', routes);
 
-
-
-dbConnect((err, mongodb) => {
-    if (err) {
-        console.log(`[server]: server connection error: ${err}`)
-    } else {
+db.mongoose.connect(db.url)
+    .then(() => {
         app.listen(port, () => {
             console.log(`[server]: App listening on port ${port}`);
         })
-    }
-})
+    })
+    .catch((err) => {
+        console.log(`[server]: server connection error: ${err}`)
+    });
