@@ -3,6 +3,16 @@ export const item = (mongoose) => {
         name: {
             type: String, required: true, maxLength: 100
         },
-        type: String,
+        description: String,
+        author: String,
+        //image: ???,
+        statsDelta: {
+            exp: Number,
+            hp: Number,
+            def: Number,
+            atk: Number,
+            speed: Number,
+            gold: Number,
+        },
     })
 }

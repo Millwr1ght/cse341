@@ -8,8 +8,15 @@ export const user = (mongoose) => {
         },
         profileIsPublic: Boolean,
         playerData: {
-            exp: Number,
-            inventory: [{ item: String, quantity: Number }]
+            inventory: [{ item: String, quantity: Number }],
+            stats: {
+                exp: Number,
+                hp: Number,
+                def: Number,
+                atk: Number,
+                speed: Number,
+                gold: Number,
+            }
         }
     })
 }
