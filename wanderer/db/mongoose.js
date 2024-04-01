@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
 import { user } from '../models/user.js';
+import { item } from '../models/item.js';
+import { map } from '../models/map.js';
 import { encounter } from '../models/encounter.js';
 
 const uri = process.env.DB_URI;
@@ -9,10 +11,10 @@ const db = {};
 
 db.mongoose = mongoose;
 db.url = uri;
-db.user = user(db.mongoose);
-db.item;
-db.map;
-db.encounter = encounter(db.mongoose);
+db.user = user(mongoose);
+db.item = item(mongoose);
+db.encounter = encounter(mongoose);
+db.map = map();
 
 export default db;
 

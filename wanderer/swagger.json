@@ -58,11 +58,8 @@
       "get": {
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -141,11 +138,8 @@
       "get": {
         "description": "",
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -265,6 +259,16 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new map.",
+            "schema": {
+              "$ref": "#/definitions/AddMap"
+            }
+          }
+        ],
         "responses": {
           "default": {
             "description": ""
@@ -393,6 +397,714 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "pablo"
+        },
+        "password": {
+          "type": "string",
+          "example": "picasso"
+        },
+        "playerData": {
+          "type": "object",
+          "properties": {
+            "stats": {
+              "type": "object",
+              "properties": {
+                "exp": {
+                  "type": "number",
+                  "example": 0
+                },
+                "hp": {
+                  "type": "number",
+                  "example": 10
+                },
+                "def": {
+                  "type": "number",
+                  "example": 10
+                },
+                "atk": {
+                  "type": "number",
+                  "example": 3
+                },
+                "speed": {
+                  "type": "number",
+                  "example": 1
+                },
+                "gold": {
+                  "type": "number",
+                  "example": 20
+                }
+              }
+            },
+            "inventory": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "item": {
+                    "type": "string",
+                    "example": "gold"
+                  },
+                  "quantity": {
+                    "type": "number",
+                    "example": 20
+                  }
+                }
+              }
+            }
+          }
+        },
+        "profileIsPublic": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "AddUser": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "pablo"
+        },
+        "password": {
+          "type": "string",
+          "example": "picasso"
+        }
+      }
+    },
+    "UpdateUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "1234"
+        },
+        "username": {
+          "type": "string",
+          "example": "pablo"
+        },
+        "password": {
+          "type": "string",
+          "example": "picasso"
+        },
+        "playerData": {
+          "type": "object",
+          "properties": {
+            "stats": {
+              "type": "object",
+              "properties": {
+                "exp": {
+                  "type": "number",
+                  "example": 0
+                },
+                "hp": {
+                  "type": "number",
+                  "example": 10
+                },
+                "def": {
+                  "type": "number",
+                  "example": 10
+                },
+                "atk": {
+                  "type": "number",
+                  "example": 3
+                },
+                "speed": {
+                  "type": "number",
+                  "example": 1
+                },
+                "gold": {
+                  "type": "number",
+                  "example": 20
+                }
+              }
+            },
+            "inventory": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "profileIsPublic": {
+          "type": "boolean",
+          "example": false
+        }
+      },
+      "required": [
+        "userId"
+      ]
+    },
+    "DeleteUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "example": "1234"
+        }
+      },
+      "required": [
+        "userId"
+      ]
+    },
+    "Item": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "gold"
+        },
+        "description": {
+          "type": "string",
+          "example": "Loose coin"
+        },
+        "author": {
+          "type": "string",
+          "example": "Mill"
+        },
+        "statsDelta": {
+          "type": "object",
+          "properties": {
+            "exp": {
+              "type": "number",
+              "example": 0
+            },
+            "hp": {
+              "type": "number",
+              "example": 0
+            },
+            "def": {
+              "type": "number",
+              "example": 0
+            },
+            "atk": {
+              "type": "number",
+              "example": 0
+            },
+            "speed": {
+              "type": "number",
+              "example": 0
+            },
+            "gold": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        }
+      }
+    },
+    "AddItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "gold"
+        },
+        "description": {
+          "type": "string",
+          "example": "Loose coin"
+        },
+        "author": {
+          "type": "string",
+          "example": "Mill"
+        },
+        "statsDelta": {
+          "type": "object",
+          "properties": {
+            "exp": {
+              "type": "number",
+              "example": 0
+            },
+            "hp": {
+              "type": "number",
+              "example": 0
+            },
+            "def": {
+              "type": "number",
+              "example": 0
+            },
+            "atk": {
+              "type": "number",
+              "example": 0
+            },
+            "speed": {
+              "type": "number",
+              "example": 0
+            },
+            "gold": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        }
+      }
+    },
+    "UpdateItem": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "example": "1"
+        },
+        "name": {
+          "type": "string",
+          "example": "gold"
+        },
+        "description": {
+          "type": "string",
+          "example": "Loose coin"
+        },
+        "author": {
+          "type": "string",
+          "example": "Mill"
+        },
+        "statsDelta": {
+          "type": "object",
+          "properties": {
+            "exp": {
+              "type": "number",
+              "example": 0
+            },
+            "hp": {
+              "type": "number",
+              "example": 0
+            },
+            "def": {
+              "type": "number",
+              "example": 0
+            },
+            "atk": {
+              "type": "number",
+              "example": 0
+            },
+            "speed": {
+              "type": "number",
+              "example": 0
+            },
+            "gold": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        }
+      },
+      "required": [
+        "itemId"
+      ]
+    },
+    "DeleteItem": {
+      "type": "object",
+      "properties": {
+        "itemId": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      "required": [
+        "itemId"
+      ]
+    },
+    "Map": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "crossroads_1"
+        },
+        "tilemap": {
+          "type": "array",
+          "example": [
+            4,
+            4,
+            4,
+            7,
+            7,
+            0,
+            7,
+            7,
+            4,
+            4,
+            4,
+            7,
+            7,
+            1,
+            7,
+            7,
+            4,
+            4,
+            4,
+            7,
+            7,
+            0,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            0,
+            0,
+            0,
+            7,
+            7,
+            7,
+            0,
+            0,
+            0,
+            7,
+            7,
+            0,
+            0,
+            1,
+            0,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            0,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            0,
+            7,
+            7,
+            7,
+            7
+          ],
+          "items": {
+            "type": "number"
+          }
+        },
+        "height": {
+          "type": "number",
+          "example": 8
+        },
+        "width": {
+          "type": "number",
+          "example": 8
+        },
+        "tileset": {
+          "type": "string",
+          "example": "default"
+        }
+      }
+    },
+    "AddMap": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "crossroads_1"
+        },
+        "tilemap": {
+          "type": "array",
+          "example": [
+            4,
+            4,
+            4,
+            7,
+            7,
+            0,
+            7,
+            7,
+            4,
+            4,
+            4,
+            7,
+            7,
+            1,
+            7,
+            7,
+            4,
+            4,
+            4,
+            7,
+            7,
+            0,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            0,
+            0,
+            0,
+            7,
+            7,
+            7,
+            0,
+            0,
+            0,
+            7,
+            7,
+            0,
+            0,
+            1,
+            0,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            0,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            0,
+            7,
+            7,
+            7,
+            7
+          ],
+          "items": {
+            "type": "number"
+          }
+        },
+        "height": {
+          "type": "number",
+          "example": 8
+        },
+        "width": {
+          "type": "number",
+          "example": 8
+        },
+        "tileset": {
+          "type": "string",
+          "example": "default"
+        }
+      }
+    },
+    "UpdateMap": {
+      "type": "object",
+      "properties": {
+        "mapId": {
+          "type": "string",
+          "example": "2"
+        },
+        "name": {
+          "type": "string",
+          "example": "crossroads_1"
+        },
+        "tilemap": {
+          "type": "array",
+          "example": [
+            4,
+            4,
+            4,
+            7,
+            7,
+            0,
+            7,
+            7,
+            4,
+            4,
+            4,
+            7,
+            7,
+            1,
+            7,
+            7,
+            4,
+            4,
+            4,
+            7,
+            7,
+            0,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            0,
+            0,
+            0,
+            7,
+            7,
+            7,
+            0,
+            0,
+            0,
+            7,
+            7,
+            0,
+            0,
+            1,
+            0,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            0,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            7,
+            0,
+            7,
+            7,
+            7,
+            7
+          ],
+          "items": {
+            "type": "number"
+          }
+        },
+        "height": {
+          "type": "number",
+          "example": 8
+        },
+        "width": {
+          "type": "number",
+          "example": 8
+        },
+        "tileset": {
+          "type": "string",
+          "example": "default"
+        }
+      },
+      "required": [
+        "mapId"
+      ]
+    },
+    "DeleteMap": {
+      "type": "object",
+      "properties": {
+        "mapId": {
+          "type": "string",
+          "example": "2"
+        }
+      },
+      "required": [
+        "mapId"
+      ]
+    },
+    "Encounter": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Ooh, shiny!"
+        },
+        "flavor": {
+          "type": "string",
+          "example": "You found some loose coins on the ground!"
+        },
+        "description": {
+          "type": "string",
+          "example": "player finds some gold and adds it to their inventory"
+        },
+        "author": {
+          "type": "string",
+          "example": "Mill"
+        },
+        "date": {
+          "type": "string",
+          "example": "30/03/24"
+        },
+        "userSubmission": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "AddEncounter": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Ooh, shiny!"
+        },
+        "flavor": {
+          "type": "string",
+          "example": "You found some loose coins on the ground!"
+        },
+        "description": {
+          "type": "string",
+          "example": "player finds some gold and adds it to their inventory"
+        },
+        "author": {
+          "type": "string",
+          "example": "Mill"
+        }
+      }
+    },
+    "UpdateEncounter": {
+      "type": "object",
+      "properties": {
+        "encounterId": {
+          "type": "string",
+          "example": "1234"
+        },
+        "title": {
+          "type": "string",
+          "example": "Ooh, shiny!"
+        },
+        "flavor": {
+          "type": "string",
+          "example": "You found some loose coins on the ground!"
+        },
+        "description": {
+          "type": "string",
+          "example": "player finds some gold and adds it to their inventory"
+        },
+        "author": {
+          "type": "string",
+          "example": "Mill"
+        },
+        "userSubmission": {
+          "type": "boolean",
+          "example": true
+        }
+      },
+      "required": [
+        "encounterId"
+      ]
+    },
+    "DeleteEncounter": {
+      "type": "object",
+      "properties": {
+        "encounterId": {
+          "type": "string",
+          "example": "1234"
+        }
+      },
+      "required": [
+        "encounterId"
+      ]
     }
   }
 }
