@@ -15,4 +15,5 @@ export const item = (mongoose) => {
             gold: Number,
         },
     })
+    return mongoose.model('items', itemSchema);
 }

@@ -1,5 +1,7 @@
-export const map = (mongoose) => {
-    const mapSchema = mongoose.Schema({
+import { Schema, model } from "mongoose"
+
+export const map = () => {
+    const mapSchema = Schema({
         name: {
             type: String, required: true, maxLength: 100
         },
@@ -7,6 +9,7 @@ export const map = (mongoose) => {
         height: Number,
         width: Number,
     })
+    return model('maps', mapSchema, 'maps');
 }
 
 /* for example:

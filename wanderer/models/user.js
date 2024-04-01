@@ -19,4 +19,5 @@ export const user = (mongoose) => {
             }
         }
     })
+    return mongoose.model('users', userSchema);
 }

@@ -1,41 +1,112 @@
-import { err400, err500, success204 } from "./statuses.js";
+import { err400, err500, err501, success200, success204 } from "./statuses.js";
 import { buildIdQuery } from "../library/utils.js";
 import 'dotenv/config';
-import { getDb } from "../db/connection.js";
+//import { getDb } from "../db/connection.js";
+import db from "../db/mongoose.js";
+
+import mongoose from "mongoose";
+
+// const USER = new mongoose.Model('users', { name: String })
+const USER = db.user;
 
 export const logInUser = (req, res) => { /* */ }
 
 export const logOutUser = (req, res) => { /* */ }
 
-export const addUser = (req, res) => { /* */ }
+export const addUser = async (req, res) => {
+    try {
+
+    } catch (error) {
+        console.log('[server]: CREATE error: ', error);
+        err500(res)
+    }
+}
 
 export const getAllUsers = async (req, res) => {
     /* */
     try {
         //connect &query database
-        const db = getDb()
-        const result = await db.collection('users').find({});
 
-        //output result
-        if (result) {
-            //console.log(`Found the following recipe(s): `);
-            const results = await result.toArray();
-            res.status(200)
-                .send(results);
-        } else {
-            res.status(404)
-            console.log(`No recipes found.`);
-        }
+        //mongoose
+        USER.find({})//.toArray()
+            .then((data) => {
+                success200(res, data[0], `Found some users!`)
+            })
+            .catch((error) => {
+                err500(res, `[mongoose]: GET ALL error: ${error}`)
+            })
+
+
     } catch (error) {
-        console.log('GET ALL error: ', error);
+        console.log('[server]: GET ALL error: ', error);
         err500(res)
     }
 }
 
-export const getUserById = (req, res) => { /* */ }
+export const getUserById = async (req, res) => {
+    try {
 
-export const getTopUsers = (req, res) => { /* */ }
+    } catch (error) {
+        console.log('[server]: GET ONE error: ', error);
+        err500(res)
+    }
+}
 
-export const updateUser = (req, res) => { /* */ }
+export const getTopUsers = async (req, res) => {
+    /* */
 
-export const deleteUser = (req, res) => { /* */ }
+    const queryStat = req.params.stat
+
+    const query = { 'profileIsPublic': true }
+
+    const options = {
+        projection: { _id: 1, username: 1, playerStats: 1 }
+    }
+
+    try {
+        //connect &query database
+
+        //mongoose
+        USER.find(query, options).toArray()
+            .then((data) => {
+                success200(res, data[0], `Found some users!`)
+            })
+            .catch((error) => {
+                err500(res, `[mongoose]: READ error: ${error}`)
+            })
+
+
+    } catch (error) {
+        console.log('[server]: GET ALL error: ', error);
+        err500(res)
+    }
+
+}
+
+export const updateUser = async (req, res) => {
+    try {
+
+    } catch (error) {
+        console.log('[server]: UPDATE error: ', error);
+        err500(res)
+    }
+}
+
+export const deleteUser = async (req, res) => {
+    try {
+        const idToDelete = req.params.user_id;
+
+        USER.deleteOne({ _id: idToDelete })
+            .then((data) => {
+                success204(res)
+            })
+            .catch((error) => {
+                console.log('[mongoose]: DELETE error: ', error);
+                err500(res);
+            })
+
+    } catch (error) {
+        console.log('[server]: DELETE error: ', error);
+        err500(res)
+    }
+}
