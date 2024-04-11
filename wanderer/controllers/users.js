@@ -9,10 +9,6 @@ import mongoose from "mongoose";
 // const USER = new mongoose.Model('users', { name: String })
 const USER = db.user;
 
-export const logInUser = (req, res) => { /* */ }
-
-export const logOutUser = (req, res) => { /* */ }
-
 export const addUser = async (req, res) => {
     try {
 
@@ -30,7 +26,8 @@ export const getAllUsers = async (req, res) => {
         //mongoose
         USER.find({})//.toArray()
             .then((data) => {
-                success200(res, data[0], `Found some users!`)
+                console.log(data);
+                success200(res, data, `Found some users!`)
             })
             .catch((error) => {
                 err500(res, `[mongoose]: GET ALL error: ${error}`)
