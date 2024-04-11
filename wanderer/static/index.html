@@ -3,10 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <style>
+        html { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; }
+        .unauth { display: block; }
+        .auth { display: none; }
+    </style>
+    <title>Wanderer API | Home</title>
 </head>
 <body>
     <h1>Welcome!</h1>
-    <a href="/api-docs">/api-docs</a>
+    <div class="content unauth">
+        <a href="/auth">please login with github to continue!</a>
+    </div>
+    <div class="content auth">
+        <h2>How to use the wanderer info api:</h2>
+        <a href="/api-docs">/api-docs</a>
+    </div>
 </body>
+<script>
+    const URL_PARAMS = new URLSearchParams(window.location.search);
+    const TOKEN = URL_PARAMS.get('token');
+
+    //show
+    const show = (selector) => {
+        if (!document.querySelector(selector)) {
+            return
+        }
+        document.querySelector(selector).style.display = 'block';
+    };
+
+    //hide
+    const hide = (selector) => {
+        if (!document.querySelector(selector)) {
+            return
+        }
+        document.querySelector(selector).style = 'display: none';
+    };
+
+    if (TOKEN) {
+        hide('.unauth');
+        show('.auth');
+    }
+</script>
 </html>
