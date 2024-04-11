@@ -32,7 +32,7 @@ export const dbConnect = async (callback = (err, _db) => { return }) => {
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
 
         //set up db crawler
-        _db = client;
+        _db = client.db(process.env.DB_NAME);
         callback ? callback(null, _db) : console.log('null');;
 
         _recipesCollection = client.db(process.env.DB_NAME).collection('recipes')
