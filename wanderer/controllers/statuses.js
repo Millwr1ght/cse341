@@ -5,6 +5,13 @@ export const err400 = (res, msg = 'Data can not be empty!') => {
     });
 }
 
+//none content
+export const err404 = (res, msg = 'Nothing found :[') => {
+    return res.status(404).send({
+        message: msg,
+    });
+}
+
 //Our bad
 export const err500 = (res, msg = 'Something went wrong our our end. :[') => {
     return res.status(500).send({
@@ -22,6 +29,14 @@ export const err501 = (res, msg = 'TODO: this') => {
 //OK
 export const success200 = (res, body, msg = 'OK!') => {
     return res.status(200).send({
+        message: msg,
+        ...body
+    })
+}
+
+//Created the thing!
+export const success201 = (res, body, msg = 'OK!') => {
+    return res.status(201).send({
         message: msg,
         ...body
     })
