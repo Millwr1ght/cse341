@@ -46,8 +46,8 @@ export const addUser = async (req, res) => {
         const result = await getDb().collection('users').insertOne(newUser);
 
         if (result) {
-            success201(res, null, `New cookbook added with _id: ${result.insertedId}`)
-            console.log(`New cookbook added with _id: ${result.insertedId}`);
+            success201(res, null, `New user added with _id: ${result.insertedId}`)
+            console.log(`New user added with _id: ${result.insertedId}`);
         }
     } catch (error) {
         console.log('[server]: CREATE error: ', error);
