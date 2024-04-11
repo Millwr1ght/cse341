@@ -11,8 +11,6 @@ userRouter.post('/', usersController.addUser)
 /* --read-- */
 userRouter.get('/:user_id', usersController.getUserById);
 
-userRouter.get('/list', usersController.getAllUsers);
-
 userRouter.get('/top/:stat', usersController.getTopUsers);
 
 /* --update-- */

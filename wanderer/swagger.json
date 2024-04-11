@@ -5,11 +5,20 @@
     "description": "Get game info from the database",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "wanderer-dymk.onrender.com",
   "servers": [
     {
-      "url": "localhost:8080",
-      "description": "dev"
+      "url": "{protocol}://wanderer-dymk.onrender.com",
+      "description": "prod",
+      "variables": {
+        "protocol": {
+          "enum": [
+            "http",
+            "https"
+          ],
+          "default": "https"
+        }
+      }
     }
   ],
   "basePath": "/",
@@ -170,16 +179,6 @@
         }
       }
     },
-    "/user/list": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
     "/user/top/{stat}": {
       "get": {
         "description": "",
@@ -217,24 +216,6 @@
             "schema": {
               "$ref": "#/definitions/AddItem"
             }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/items/{item_id}/upload": {
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "item_id",
-            "in": "path",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {

@@ -8,7 +8,7 @@ itemRouter.get('/', itemsController.getAllItems);
 /* --create-- */
 itemRouter.post('/', itemsController.addItem)
 
-itemRouter.post('/:item_id/upload', itemsController.addImage)
+//itemRouter.post('/:item_id/upload', itemsController.addImage) //[stretch goal]
 
 /* --read-- */
 itemRouter.get('/:item_id', itemsController.getItemById);

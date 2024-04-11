@@ -72,7 +72,7 @@ const doc = {
             profileIsPublic: false,
         },
         DeleteUser: {
-            $userId: '1234'
+            $userId: 'you dont need this'
         },
         Item: {
             //itemId: '1',
@@ -116,7 +116,7 @@ const doc = {
             }
         },
         DeleteItem: {
-            $itemId: '1',
+            $itemId: 'you dont need this',
         },
         Map: {
             //mapId: '2',
@@ -169,7 +169,7 @@ const doc = {
             tileset: 'default',
         },
         DeleteMap: {
-            $mapId: '2',
+            $mapId: 'you dont need this',
         },
         Encounter: {
             //encounterId: '1234'
@@ -195,7 +195,7 @@ const doc = {
             userSubmission: true,
         },
         DeleteEncounter: {
-            $encounterId: '1234',
+            $encounterId: 'you dont need this',
         },
 
     },
