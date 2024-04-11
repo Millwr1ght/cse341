@@ -5,10 +5,6 @@ const userRouter = Router();
 
 userRouter.get('/', usersController.getAllUsers);
 
-/* --auth-- */
-userRouter.get('/login', usersController.logInUser);
-userRouter.get('/logout', usersController.logOutUser);
-
 /* --create-- */
 userRouter.post('/', usersController.addUser)
 

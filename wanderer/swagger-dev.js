@@ -18,6 +18,15 @@ const doc = {
     ],
     consumes: ['application/json'],
     produces: ['application/json'],
+    securityDefinitions: {
+        OAuth2: {
+            type: 'oauth2',
+            authorizationUrl: 'https://github.com/login/oauth/authorize',
+            flow: 'implicit',
+            scopes: {}, //TODO: this
+        }
+    },
+
     definitions: {
 
         User: {

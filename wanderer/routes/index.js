@@ -1,4 +1,5 @@
 import Router from 'express';
+import axios from 'axios';
 import swagger from './swagger.js';
 import itemRouter from './items.js';
 import mapRouter from './maps.js';
@@ -18,11 +19,37 @@ const routes = Router();
 
 //the home page
 routes.get('/', (req, res) => {
-    console.log('[server]: token: ', req.query.token);
+    console.log('[server]: access token: ', req.query.token);
 
     res.status(200)
         .sendFile(path.join(__dirname, '../static/index.html'))
 });
+
+//auth
+routes.get('/auth', (req, res) => {
+    res.redirect(
+        `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`
+    );
+})
+
+routes.get('/oauth-callback', ({ query: { code } }, res) => {
+    const body = {
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_SECRET,
+        code,
+    }
+
+    const options = { headers: { accept: 'application/json' } };
+    axios
+        .post('https://github.com/login/oauth/access_token', body, options)
+        .then((_res) => _res.data.access_token)
+        .then((token) => {
+            console.log('My token:', token);
+
+            res.redirect(`/?token=${token}`);
+        })
+        .catch((err) => res.status(500).json({ err: err.message }));
+})
 
 //database collections
 routes.use('/user', userRouter);
