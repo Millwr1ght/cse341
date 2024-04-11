@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-describe('insert', () => {
+describe('insert user', () => {
     let connection;
     let db;
 
